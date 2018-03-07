@@ -1,4 +1,4 @@
-
+#clean the data
 #extracting text files
 with open("prefix.txt", 'r') as f:
     prefix = [line.rstrip('\n') for line in f]
