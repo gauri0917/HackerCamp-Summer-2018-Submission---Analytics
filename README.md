@@ -1,4 +1,4 @@
-# Data-Deduplication
+# Analytics Assignment Innovacer
 
 # Problem Statement 
 Variation in names leads to difficulty in identifying a unique person and hence deduplication
@@ -21,23 +21,29 @@ Dataset contains following fields:
 * fn: First Name of the patient
 
 # Approach 
-* If two entries have either unequal dob or gender then they refer to two different patient
-* If two entries have same dob and gender then we check the similarity of the names.Similarity between two names lies between 0.0 and 1.0. Similarity score of 0.0 means two names are completely different and similarity score of 1.0 means they are completely same.
-* We fix a threshold value between 0.0 and 1.0. If score is less then that threshold then they refer to different person else they refer to same patient and we remove the duplicate entry.
+* Firstly I clean the data set and remove all the general prefixes annd suffix of a name.
+* I prepared a list of all the unique first and last names and extrated the unique name having a prefix/suffix from the data frame.
+* Then a algorithm is applied which checks for the replacement of the suffix/prefix by checking it from the unique list of names with prefix and sufix and hence the first and last names are processed to its simplst name possible.
+* Then lastly,we apply the drop_duplicate function of pandas to drop the entries with same value in all the fields.
 
-# Similarity Calculation Algorithm 
-Input: two strings name1, name2 <br/>
-Output: similarity score between 2 names<br/>
-* If two strings are exactly same then we return 1.0
-* Else If either of the string is empty we return 0.0
-* Else we initialize max (max similarity score) to 0.0 and compute similarity score.
-* I have defined 10 different functions to transform each name with a penalty score based on their importance. 
-* These functions are applied on both the names in combination and penalty score and resultant name are stored.
-* By applying in combinations means that in first iteration each will be applied individually, in second iteration two taken together, in third iterations three taken togther and so on. In final iteration all 10 are applied together.
-* After end of each iteration I am storing the resultant string and the total penalty score in a set for each name.
-* Then i run two for loop to iterate over the two set if they have same string then i compute score as 1 - penalty1 - penalty2. 
-* If score > max then max = score
-* Return max
+# Cleaning the DataSet
+Input: strings name<br/>
+Output: Processed Name<br/>
+* Firstly we have a pre defined list of sufix and prefix(like Mr.,Mrs.,JR)then check that if the prefix or suffix belongs to anyone of them than it will be ignored or removed.
+* If the above case doesn't apply then we return the nme with only the first letter of suffix/prefix since it is the simplest form of representing a prefix/sufix and its very low probability than on a same two persons with same name and diffrent suffix(but same 1st letter of suffix) occurs.
+* It returns the name without any change if the name doesn't have suffix/prefix.
+
+# Unique Elements
+* It extracts the list of all unique first and last names by using the unique() function.
+* Now from all the unique names we only have the use for names having any sufix,so we extract the name having a suffix and all the unique first and last names are stored in a seperate list.
+
+# Replacement ALgorithm
+Input: strings name<br/>
+Output: Replaced Name<br/>
+* Firstly all the name are send to a function which first check if the name has a suffix or not.
+* If the sufix is present than the name is sent to another function to check if the name is unique and can be replaced without a suffix or some other name is present with same name but different sufix.
+* If the above case exists the name is not replaced and is unique.
+
 
 
 # How to run the program:
@@ -46,16 +52,18 @@ Output: similarity score between 2 names<br/>
 Tools Used: 
 * python 3.6
 * pandas module
-* re module
-* itertools module
+* numpy module
+
 
 # File Descriptions:
 
 * suffixes.txt: contains list of suffixes 
 * prefixes.txt: contains list of prefixes
-* compound_prefixes: contains list of compound prefixes
-* name_parser.py: helps in name parsing like splitting name into 4 parts prefix, first part, last part, suffix and other utility functions
-* similarity_evaluation.py: contains implementation of similarity function
+* unique_first_suffix: contains list of unique first names that have suffix
+* unique_last_suffix: contains list of unique last names that have suffix
+* clean.py: clean the data by removing common prefix/sufix
+* unique.py: helps in creating the list of unique first and last name with suffix
+* replacement.py: replaces the name with suffix with suitable name
 * main.py: implements the functionality of reading the file and performing deduplication
 * Deduplication Problem - Sample Dataset.csv: input dataset provided by innovaccer. I have added few more entries to test my algorithm
 * Output.csv: contains the output of the algorithm.
