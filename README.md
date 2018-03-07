@@ -60,9 +60,9 @@ Tools Used:
 
 * suffixes.txt: contains list of suffixes 
 * prefixes.txt: contains list of prefixes
-* unique_first_suffix: contains list of unique first names that have suffix
-* unique_last_suffix: contains list of unique last names that have suffix
-* clean.py: clean the data by removing common prefix/sufix
+* first_suffix: contains list of unique first names that have suffix
+* last_suffix: contains list of unique last names that have suffix
+* cl.py: clean the data by removing common prefix/sufix
 * unique.py: helps in creating the list of unique first and last name with suffix
 * replacement.py: replaces the name with suffix with suitable name
 * main.py: implements the functionality of reading the file and performing deduplication
