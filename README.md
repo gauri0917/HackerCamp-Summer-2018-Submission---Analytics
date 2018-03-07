@@ -21,27 +21,28 @@ Dataset contains following fields:
 * fn: First Name of the patient
 
 # Approach 
-* Firstly I clean the data set and remove all the general prefixes annd suffix of a name.
-* I prepared a list of all the unique first and last names and extrated the unique name having a prefix/suffix from the data frame.
-* Then a algorithm is applied which checks for the replacement of the suffix/prefix by checking it from the unique list of names with prefix and sufix and hence the first and last names are processed to its simplst name possible.
-* Then lastly,we apply the drop_duplicate function of pandas to drop the entries with same value in all the fields.
+* Firstly I have cleaned the data set and remove all the general prefixes annd suffix of a name.
+* I prepared a list of all the unique first and last names and extracted the unique name having a prefix/suffix from the data frame.
+* Then a algorithm is applied which checks for the replacement of the suffix/prefix by checking it from the unique list of names with prefix and suffix and hence the first and last names are processed to its simplest name possible.
+* Then lastly , we apply the drop_duplicate function of pandas to drop the entries with same value in all the fields.
 
 # Cleaning the DataSet
-Input: strings name<br/>
+Input: string name<br/>
 Output: Processed Name<br/>
-* Firstly we have a pre defined list of sufix and prefix(like Mr.,Mrs.,JR)then check that if the prefix or suffix belongs to anyone of them than it will be ignored or removed.
-* If the above case doesn't apply then we return the nme with only the first letter of suffix/prefix since it is the simplest form of representing a prefix/sufix and its very low probability than on a same two persons with same name and diffrent suffix(but same 1st letter of suffix) occurs.
+* Firstly we have a pre defined list of suffix and prefix(like Mr. ,Mrs. ,JR)then check that if the prefix or suffix belongs to anyone of them than it will be ignored or removed.
+* If the above case doesn't apply then we return the name with only the first letter of suffix/prefix since it is the simplest form of representing a prefix/suffix and its very low probability than on a same day two persons with same name and different suffix(but same 1st letter of suffix) occurs.
+* By considering only first letter of suffix reduces complexity and increases efficiency(since mostly in data frame itself the suffix are considered by first letter).
 * It returns the name without any change if the name doesn't have suffix/prefix.
 
 # Unique Elements
 * It extracts the list of all unique first and last names by using the unique() function.
-* Now from all the unique names we only have the use for names having any sufix,so we extract the name having a suffix and all the unique first and last names are stored in a seperate list.
+* Now from all the unique names we only have the use for names having any suffix,so we extract the name having a suffix and all the unique first and last names are stored in a separate list.
 
 # Replacement ALgorithm
-Input: strings name<br/>
+Input: string name<br/>
 Output: Replaced Name<br/>
 * Firstly all the name are send to a function which first check if the name has a suffix or not.
-* If the sufix is present than the name is sent to another function to check if the name is unique and can be replaced without a suffix or some other name is present with same name but different sufix.
+* If the sufix is present than the name is sent to another function to check if the name is unique and can be replaced without a suffix or some other name is present with same name but different suffix.
 * If the above case exists the name is not replaced and is unique.
 
 
